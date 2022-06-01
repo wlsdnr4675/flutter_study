@@ -94,7 +94,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: color,
               ),
               onTap: () => {
-                setState(() => {color = Colors.red})
+                setState(() {
+                  color = Colors.redAccent;
+                }),
+                Navigator.of(context).pop()
               },
             ),
             Text("이름"),
