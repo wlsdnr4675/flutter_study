@@ -50,6 +50,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   int _idx = 0;
+  Color color = Colors.blue;
 
   void _incrementCounter() {
     setState(() {
@@ -63,6 +64,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    color = Colors.green;
+  }
+
+  @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
@@ -72,18 +79,23 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        title: Text("패스트 캠퍼스 테스트"),
+        title: Text(widget.title),
       ),
       body: Center(
         child: GridView.count(
           crossAxisCount: 2,
           childAspectRatio: 1,
           children: <Widget>[
-            Container(
-              child: Text("이름"),
-              margin: EdgeInsets.all(16),
-              padding: EdgeInsets.all(16),
-              color: Colors.blue,
+            InkWell(
+              child: Container(
+                child: Text("이름"),
+                margin: EdgeInsets.all(16),
+                padding: EdgeInsets.all(16),
+                color: color,
+              ),
+              onTap: () => {
+                setState(() => {color = Colors.red})
+              },
             ),
             Text("이름"),
             ListTile(
@@ -95,7 +107,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {print("FAB 눌림")},
+        onPressed: () => {
+          Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+            return MyHomePage(title: "새로운 페이지 입니다.");
+          }))
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
