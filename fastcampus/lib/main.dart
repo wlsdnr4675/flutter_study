@@ -51,6 +51,9 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   int _idx = 0;
   Color color = Colors.blue;
+  int count1 = 0;
+  int count2 = 0;
+  String vicTeam = "";
 
   void _incrementCounter() {
     setState(() {
@@ -81,33 +84,93 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: GridView.count(
-          crossAxisCount: 2,
-          childAspectRatio: 1,
-          children: <Widget>[
-            InkWell(
-              child: Container(
-                child: Text("이름"),
-                margin: EdgeInsets.all(16),
-                padding: EdgeInsets.all(16),
-                color: color,
+      body: Column(
+        children: [
+          Container(
+            height: 50,
+          ),
+          Text(
+            "탁구 대회",
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          ),
+          Container(
+            height: 30,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text("페스트, 대학"),
+              Text("캠퍼스 대학"),
+            ],
+          ),
+          Container(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text(
+                "$count1점",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
-              onTap: () => {
-                setState(() {
-                  color = Colors.redAccent;
-                }),
-                Navigator.of(context).pop()
-              },
-            ),
-            Text("이름"),
-            ListTile(
-              title: Text("이름"),
-              trailing: Text("오진욱"),
-              onTap: () => {print("오진욱")},
-            )
-          ],
-        ),
+              Text(
+                "$count2점",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Row(
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        setState(() {
+                          count1 = count1 + 1;
+                          if (count1 > 10) {
+                            vicTeam = "페스트 대학 승리";
+                          }
+                        });
+                      },
+                      icon: Icon(Icons.add)),
+                  IconButton(
+                      onPressed: () {
+                        setState(() {
+                          count1 = count1 - 1;
+                        });
+                      },
+                      icon: Icon(Icons.remove)),
+                ],
+              ),
+              Row(
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        setState(() {
+                          count2 = count2 + 1;
+                          if (count2 > 10) {
+                            vicTeam = "캠퍼스 대학 승리";
+                          }
+                        });
+                      },
+                      icon: Icon(Icons.add)),
+                  IconButton(
+                      onPressed: () {
+                        setState(() {
+                          count2 = count2 - 1;
+                        });
+                      },
+                      icon: Icon(Icons.remove)),
+                ],
+              )
+            ],
+          ),
+          Text(
+            vicTeam,
+            style: TextStyle(fontSize: 50, color: Colors.green),
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {
