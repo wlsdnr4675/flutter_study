@@ -7,10 +7,10 @@ class Todo {
   int date;
 
   Todo(
-      {this.title = "",
-      this.memo = "",
-      this.category = "",
-      this.color = 0,
-      this.done = 0,
-      this.date = 0});
+      {required this.title,
+      required this.memo,
+      required this.category,
+      required this.color,
+      required this.done,
+      required this.date});
 }
